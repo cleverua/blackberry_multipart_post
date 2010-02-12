@@ -4,15 +4,26 @@ import java.util.Vector;
 
 import net.rim.device.api.util.ByteVector;
 
-public class Coder {
+public class PostPrameters {
     public static final String CRLF = "\r\n";
     public static final String BOUNDARY_MARKER = "AaB03x";
+    
+    private Vector parameters;
+    
+    public PostPrameters() {
+        parameters = new Vector();
+    }
+    
+    
+    public void addParameter(RequestParam param) {
+        parameters.addElement(param);
+    }
 
-    public byte[] getMultipartBody(Vector requestParams) {
+    public byte[] getBody() {
         ByteVector buff = new ByteVector();
         
-        for (int i = 0; i < requestParams.size(); i++) {
-            RequestParam param = (RequestParam) requestParams.elementAt(i);
+        for (int i = 0; i < parameters.size(); i++) {
+            RequestParam param = (RequestParam) parameters.elementAt(i);
             if (param instanceof BinaryRequestParam)
             {
                 appendArray(buff, getBinaryHeader((BinaryRequestParam)param));

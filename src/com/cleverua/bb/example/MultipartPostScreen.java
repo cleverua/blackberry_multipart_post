@@ -2,23 +2,24 @@ package com.cleverua.bb.example;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Vector;
 
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.component.ButtonField;
+import net.rim.device.api.ui.component.Dialog;
 import net.rim.device.api.ui.component.EditField;
 import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.container.MainScreen;
 
 import com.cleverua.bb.post.BinaryRequestParam;
-import com.cleverua.bb.post.Coder;
+import com.cleverua.bb.post.PostPrameters;
 import com.cleverua.bb.post.RequestParam;
 import com.cleverua.bb.post.Sender;
 
 public class MultipartPostScreen extends MainScreen {
+    private static final String URL = "http://192.168.1.5:3000/post;deviceside=true";
     private static final String DESCRIPTION_LABEL = "Description:";
     private static final String SCREEN_TITLE = "Multipart post demo";
     private static final String POST_LABEL = "POST";
@@ -58,15 +59,16 @@ public class MultipartPostScreen extends MainScreen {
                     is.read(buffer);
                     BinaryRequestParam imageParam = new BinaryRequestParam("image", "example.png", "image/png", buffer);
                     
-                    Vector params = new Vector();
-                    params.addElement(descriptionParam);
-                    params.addElement(imageParam);
+                    PostPrameters params = new PostPrameters();
+                    params.addParameter(descriptionParam);
+                    params.addParameter(imageParam);
                     
-                    Sender.send(new Coder().getMultipartBody(params), "http://192.168.1.5:3000/post;deviceside=true");
-                    
+                    String serverResponse = Sender.send(params.getBody(), URL);
+                    Dialog.alert("Server response:\n" + serverResponse);
                     
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Dialog.alert("Exception caught: " + e);
+                    
                 } finally {
                     try { if(is != null) { is.close();} } catch (IOException e) {
                         e.printStackTrace();

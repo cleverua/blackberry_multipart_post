@@ -25,8 +25,8 @@ src\com\cleverua\bb\example\example.png
 src\com\cleverua\bb\example\MultipartPostApplication.java
 src\com\cleverua\bb\example\MultipartPostScreen.java
 src\com\cleverua\bb\post\BinaryRequestParam.java
-src\com\cleverua\bb\post\Coder.java
 src\com\cleverua\bb\post\HTTPMultipart.java
+src\com\cleverua\bb\post\PostPrameters.java
 src\com\cleverua\bb\post\RequestParam.java
 src\com\cleverua\bb\post\Sender.java
 ]

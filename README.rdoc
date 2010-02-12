@@ -1,0 +1,33 @@
+== DESCRIPTION
+
+This sample Blackberry application demonstrates an approach for HTTP multipart post request.
+
+== USAGE
+
+=== Define the RequestParam object to store text data or BinaryRequestParam object to store binary data
+
+  RequestParam descriptionParam = new RequestParam("description", "description text");  
+  BinaryRequestParam imageParam = new BinaryRequestParam("image", "example.png", "image/png", buffer);  
+
+Buffer is an image data represented by the array of bytes.
+
+=== Define the PostParameters object to get HTTP post body
+
+  PostPrameters params = new PostPrameters();
+
+=== Add your request parameters to PostParameters object
+  
+  params.addParameter(descriptionParam);
+  params.addParameter(imageParam);
+
+=== Call static method 'send' from Sender class with post parameters and URL to send to
+  
+  Sender.send(params.getBody(), URL);
+
+Your data in reqest params should be successfully sent.
+
+
+== EXAMPLES
+
+To see an example please launch MultipartPostApplication (com.cleverua.bb.example) in BlackBerry device simulator.
+

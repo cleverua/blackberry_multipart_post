@@ -9,7 +9,7 @@ import javax.microedition.io.HttpConnection;
 
 public class Sender {
     private static final int DATA_CHUNK_SIZE = 1024;
-    private static final String MULTIPART_CONTENT_TYPE = "multipart/form-data; boundary=" + Coder.BOUNDARY_MARKER;
+    private static final String MULTIPART_CONTENT_TYPE = "multipart/form-data; boundary=" + PostPrameters.BOUNDARY_MARKER;
     
     public static String send(byte[] bytes, String url) throws Exception {
         HttpConnection connection = null;
